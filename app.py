@@ -40,5 +40,5 @@ if st.button('Show Recommendations'):
     cols = st.columns(5)
     for col, name, poster in zip(cols, recommended_movie_names, recommended_movie_posters):
         with col:
-            st.text(name)
             st.image(poster)
+            st.markdown(f"<p style='text-align: center;'>{name}</p>", unsafe_allow_html=True)

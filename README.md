@@ -1,6 +1,6 @@
 # Movie Recommender System
 
-This is a simple movie recommender system built using Streamlit and The Movie Database (TMDb) API. The system recommends movies based on the similarity of the selected movie to other movies in the database.
+This is a simple movie recommender system built using Streamlit and The Movie Database (TMDB) API. The system recommends 5 movies based on the similarity of the selected movie to other movies in the database.
 
 ## Installation
 
