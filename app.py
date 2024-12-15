@@ -1,14 +1,21 @@
 import pickle
 import streamlit as st
 import requests
+from dotenv import load_dotenv
+import os
+
+ # Load environment variables from .env file
+load_dotenv()
+api_key = os.getenv('TMDB_API_KEY')
 
 def fetch_poster(movie_id):
-    url = "https://api.themoviedb.org/3/movie/{}?api_key=29e9ab27306fa0e750fdb90c4303b6d3&language=en-US".format(movie_id)
+    url = f"https://api.themoviedb.org/3/movie/{movie_id}?api_key={api_key}&language=en-US"
     data = requests.get(url)
     data = data.json()
     poster_path = data['poster_path']
     full_path = "https://image.tmdb.org/t/p/w500/" + poster_path
     return full_path
+
 
 def recommend(movie):
     index = movies[movies['title'] == movie].index[0]
@@ -35,7 +42,7 @@ selected_movie = st.selectbox(
 )
 
 if st.button('Show Recommendations'):
-    st.write("") 
+    st.write("")
     recommended_movie_names, recommended_movie_posters = recommend(selected_movie)
     cols = st.columns(5)
     for col, name, poster in zip(cols, recommended_movie_names, recommended_movie_posters):
