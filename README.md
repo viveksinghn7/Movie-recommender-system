@@ -14,11 +14,7 @@ This is a simple movie recommender system built using Python, Streamlit, and The
     ```bash
     pip install -r requirements.txt
     ```
-4. Create a `.env` file in the project directory and add your API key:
-    ```plaintext
-    API_KEY=your_api_key_here
-    ```
-5. Ensure you have the `movie_list.pkl` and `similarity.pkl` files in the `models` directory.
+4. Ensure you have the `movie_list.pkl` and `similarity.pkl` files in the `models` directory.
 
 ## Usage
 

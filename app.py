@@ -1,14 +1,9 @@
 import pickle
 import streamlit as st
 import requests
-from dotenv import load_dotenv
-import os
-
-load_dotenv()
 
 def fetch_poster(movie_id):
-    api_key = os.getenv('API_KEY')
-    url = f"https://api.themoviedb.org/3/movie/{movie_id}?api_key={api_key}&language=en-US"
+    url = "https://api.themoviedb.org/3/movie/{}?api_key=29e9ab27306fa0e750fdb90c4303b6d3&language=en-US".format(movie_id)
     data = requests.get(url)
     data = data.json()
     poster_path = data['poster_path']
@@ -21,15 +16,17 @@ def recommend(movie):
     recommended_movie_names = []
     recommended_movie_posters = []
     for i in distances[1:6]:
+        # fetch the movie poster
         movie_id = movies.iloc[i[0]].movie_id
         recommended_movie_posters.append(fetch_poster(movie_id))
         recommended_movie_names.append(movies.iloc[i[0]].title)
 
-    return recommended_movie_names, recommended_movie_posters
+    return recommended_movie_names,recommended_movie_posters
+
 
 st.title('Movie Recommender System')
-movies = pickle.load(open('models/movie_list.pkl', 'rb'))
-similarity = pickle.load(open('models/similarity.pkl', 'rb'))
+movies = pickle.load(open('models/movie_list.pkl','rb'))
+similarity = pickle.load(open('models/similarity.pkl','rb'))
 
 movie_list = movies['title'].values
 selected_movie = st.selectbox(
@@ -38,7 +35,7 @@ selected_movie = st.selectbox(
 )
 
 if st.button('Show Recommendations'):
-    st.write("")
+    st.write("") 
     recommended_movie_names, recommended_movie_posters = recommend(selected_movie)
     cols = st.columns(5)
     for col, name, poster in zip(cols, recommended_movie_names, recommended_movie_posters):
